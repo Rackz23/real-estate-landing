@@ -4,148 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agent Jane Doe – Miami Beach Realtor</title>
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Landbot Chat Widget Scripts -->
+  <!-- Landbot Chat Widget Script -->
   <script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
+  <style>
+    /* Ensure the chat container floats above all other elements */
+    #chatbot-container {
+      position: fixed;
+      bottom: 80px;       /* Push up above the button */
+      right: 20px;
+      width: 350px;       /* Adjust width as desired */
+      height: 500px;      /* Adjust height as desired */
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: none;      /* Hidden by default */
+      z-index: 9999;      /* Make sure it’s on top */
+    }
+    /* Style for the floating chat button */
+    #chat-launcher {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #2563eb; /* Tailwind blue-600 */
+      color: white;
+      padding: 0.75rem 1.25rem;   /* 12px 20px approx */
+      border-radius: 9999px;     /* Full pill shape */
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 9999;
+      transition: background-color 0.2s ease;
+    }
+    #chat-launcher:hover {
+      background-color: #1e40af; /* Tailwind blue-800 on hover */
+    }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Hero Section -->
-  <section class="bg-white py-16">
-    <div class="container mx-auto px-6 text-center">
-      <img src="https://via.placeholder.com/200" alt="Agent Jane Doe" class="mx-auto rounded-full shadow-lg w-48 h-48 mb-6">
-      <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Jane Doe — Your Miami Beach Real Estate Expert</h1>
-      <p class="text-lg text-gray-600 mb-6">With over $50M in closed sales and 10+ years of experience, I’ll help you find your perfect home.</p>
-      <a href="#contact" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-blue-700">
-        Schedule a Free Consultation
-      </a>
-    </div>
-  </section>
+  <!-- (…rest of your page: Hero, About, Listings, Testimonials, Contact…) -->
 
-  <!-- About & Credentials -->
-  <section class="bg-gray-50 py-12">
-    <div class="container mx-auto px-6 md:flex md:items-center">
-      <div class="md:w-1/2 mb-8 md:mb-0">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
-        <p class="text-gray-600 mb-4">
-          Born and raised in Miami Beach, I’ve helped hundreds of clients find their dream properties—whether buying, selling, or investing. Licensed Realtor® with top-producer awards and a passion for personalized service.
-        </p>
-        <div class="flex space-x-4">
-          <img src="https://via.placeholder.com/100x50?text=Realtor%C2%AE+Logo" alt="Realtor® Logo" class="h-12 opacity-80">
-          <img src="https://via.placeholder.com/100x50?text=Top+Producer" alt="Top Producer Award" class="h-12 opacity-80">
-        </div>
-      </div>
-      <div class="md:w-1/2 flex justify-center">
-        <img src="https://via.placeholder.com/300x200?text=Miami+Beach+Skyline" alt="Miami Beach" class="rounded-lg shadow-lg">
-      </div>
-    </div>
-  </section>
+  <!-- 1) Floating Chatbot Container (initially hidden) -->
+  <div id="chatbot-container">
+    <div id="myLandbot" style="width: 100%; height: 100%;"></div>
+  </div>
 
-  <!-- Featured Listings -->
-  <section class="bg-white py-16">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Featured Listings</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Listing 1 -->
-        <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-          <img src="https://via.placeholder.com/400x250?text=Property+1" alt="Property 1" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Oceanfront Condo</h3>
-            <p class="text-gray-600 mb-1">3 Bed • 2 Bath • $1,200,000</p>
-            <a href="#" class="text-blue-600 hover:underline">View Details</a>
-          </div>
-        </div>
-        <!-- Listing 2 -->
-        <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-          <img src="https://via.placeholder.com/400x250?text=Property+2" alt="Property 2" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Downtown Loft</h3>
-            <p class="text-gray-600 mb-1">2 Bed • 2 Bath • $850,000</p>
-            <a href="#" class="text-blue-600 hover:underline">View Details</a>
-          </div>
-        </div>
-        <!-- Listing 3 -->
-        <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-          <img src="https://via.placeholder.com/400x250?text=Property+3" alt="Property 3" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">Luxury Villa</h3>
-            <p class="text-gray-600 mb-1">4 Bed • 3 Bath • $2,500,000</p>
-            <a href="#" class="text-blue-600 hover:underline">View Details</a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-8">
-        <a href="#" class="text-blue-600 font-semibold hover:underline">View All Listings</a>
-      </div>
-    </div>
-  </section>
+  <!-- 2) Floating “Chat with Us” Button -->
+  <button id="chat-launcher" aria-label="Chat with us">
+    Chat with Us
+  </button>
 
-  <!-- Testimonials -->
-  <section class="bg-gray-50 py-16">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">What Clients Are Saying</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-lg shadow p-6">
-          <p class="text-gray-600 italic mb-4">
-            “Working with Jane was a dream. She found us our beachfront condo in under two weeks, and her negotiation skills saved us thousands."
-          </p>
-          <p class="font-semibold text-gray-800">— Mark &amp; Sarah Williams</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <p class="text-gray-600 italic mb-4">
-            “Jane’s expertise and local connections meant we sold our home at a record price. Highly recommend her to anyone in Miami Beach!"
-          </p>
-          <p class="font-semibold text-gray-800">— Carlos Fernandez</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- 3) Initialize Landbot & Toggle Visibility Logic -->
+  <script type="module">
+    // Initialize the Landbot container once (on page load)
+    let landbotInstance = null;
+    function initLandbot() {
+      if (landbotInstance) return; // already initialized
+      landbotInstance = new Landbot.Container({
+        container: '#myLandbot',
+        configUrl: 'https://storage.googleapis.com/landbot.site/v3/H-2961275-J80BNAR28BYS8LHD/index.json',
+      });
+    }
 
-  <!-- Contact / Lead Capture Form -->
-  <section id="contact" class="bg-white py-16">
-    <div class="container mx-auto px-6 max-w-lg">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Get in Touch</h2>
-      <form action="#" method="POST" class="bg-gray-50 rounded-lg shadow-lg p-8 space-y-4">
-        <div>
-          <label for="name" class="block text-gray-700 mb-1">Name</label>
-          <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500">
-        </div>
-        <div>
-          <label for="email" class="block text-gray-700 mb-1">Email</label>
-          <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500">
-        </div>
-        <div>
-          <label for="phone" class="block text-gray-700 mb-1">Phone</label>
-          <input type="tel" id="phone" name="phone" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500">
-        </div>
-        <div>
-          <label for="message" class="block text-gray-700 mb-1">Message</label>
-          <textarea id="message" name="message" rows="4" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700">
-          Send Message
-        </button>
-      </form>
-      <p class="text-center text-sm text-gray-500 mt-4">I will respond within 24 hours.</p>
-    </div>
-  </section>
+    // Grab references to DOM elements
+    const chatContainer = document.getElementById('chatbot-container');
+    const chatLauncher = document.getElementById('chat-launcher');
 
-  <!-- Chatbot Widget Embed -->
-  <section class="bg-gray-50 py-12">
-    <div class="container mx-auto px-6">
-      <h2 class="text-2xl font-bold text-gray-900 text-center mb-4">Chat with Me Live</h2>
-      <div id="myLandbot" class="w-full h-96 border border-gray-300 rounded-lg overflow-hidden">
-        <!-- Landbot widget will appear here -->
-      </div>
-      <script type="module">
-        var myLandbot = new Landbot.Container({
-          container: '#myLandbot',
-          configUrl: 'https://storage.googleapis.com/landbot.site/v3/H-2961275-J80BNAR28BYS8LHD/index.json',
-        });
-      </script>
-    </div>
-  </section>
+    // Toggle function: show/hide Landbot container
+    function toggleChat() {
+      if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+        // Show it
+        chatContainer.style.display = 'block';
+        initLandbot(); // initialize only when first opened
+      } else {
+        // Hide it
+        chatContainer.style.display = 'none';
+      }
+    }
+
+    // Attach click listener to the button
+    chatLauncher.addEventListener('click', toggleChat);
+  </script>
 
   <!-- Footer -->
   <footer class="bg-blue-600 py-8">
@@ -159,6 +100,5 @@
       </div>
     </div>
   </footer>
-
 </body>
 </html>
